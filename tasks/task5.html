@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-5</title>
+</head>
+<body>
+    <h3>Користувач задає кількість рядків і стовпців. Відобразити таблицю, у клітинках якої знаходяться числа 1, 2, 3, …</h3>
+
+    <script>
+
+        // Отримуємо кількість рядків і стовпців від користувача
+        let numRows = parseInt(prompt("Введіть кількість рядків:"))
+        let numCols = parseInt(prompt("Введіть кількість стовпців:"))
+
+        // Створюємо елемент таблиці
+        let table = document.createElement("table")
+
+        // Заповнюємо таблицю числами від 1 до (кількість рядків * кількість стовпців)
+        let num = 1
+        for (let i = 0; i < numRows; i++) {
+            let row = document.createElement("tr")
+            for (let j = 0; j < numCols; j++) {
+                let cell = document.createElement("td")
+                cell.textContent = num
+                row.appendChild(cell)
+                num++
+            }
+            table.appendChild(row)
+        }
+
+        // Додаємо таблицю до сторінки
+        document.body.appendChild(table)
+
+        // Змінюємо стилі елементів
+        let wrapperList = document.querySelectorAll('table')
+        for (const el of wrapperList) {
+            el.style.border = '1px solid black'
+            el.style.fontWeight = 900
+        }
+        let cellList = document.querySelectorAll('td')
+        for (const cell of cellList) {
+            cell.style.border = '1px solid black'
+            cell.style.padding = '3px'
+        }
+
+    </script>
+</body>
+</html>

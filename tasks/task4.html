@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-4</title>
+</head>
+<body>
+    <h3>Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку).</h3>
+
+    <div id="wishlist-container">
+        <!-- Бажання -->
+    </div>
+
+    <script>
+
+        const wishes = [
+        "Подорож до віддаленої країни",
+        "Навчитися грати на музичному інструменті",
+        "Вивчити нову мову програмування",
+        "Закінчити читати п'ять книг цього року",
+        "Стати волонтером"
+        ]
+
+        const wishlistContainer = document.getElementById("wishlist-container")
+
+        function getRandomWishes(numWishes) {
+            const randomWishes = []
+            while (randomWishes.length < numWishes) {
+                const randomIndex = Math.floor(Math.random() * wishes.length)
+                if (!randomWishes.includes(wishes[randomIndex])) {
+                randomWishes.push(wishes[randomIndex])
+                }
+            }
+            return randomWishes
+        }
+
+        // Очищаємо контейнер перед відображенням нових бажань
+        function displayWishes() {
+            const randomWishes = getRandomWishes(3)
+            wishlistContainer.innerHTML = ""
+        
+            randomWishes.forEach(wish => {
+                const wishDiv = document.createElement("div")
+                wishDiv.className = "wishlist-item"
+                wishDiv.textContent = '- ' + wish
+                wishlistContainer.appendChild(wishDiv)
+            })
+        }
+
+        // Відображаємо випадкові бажання при завантаженні сторінки
+        displayWishes()
+
+        // Змінюємо стилі елементів
+        let wrapperList = document.querySelectorAll('div')
+        for (const el of wrapperList) {
+            el.style.fontWeight = 900
+            el.style.padding = '5px'
+        }
+
+    </script>
+</body>
+</html>

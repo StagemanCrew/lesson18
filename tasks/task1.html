@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-1</title>
+</head>
+<style>
+    
+</style>
+<body>
+    <h3>Розробити калькулятор.</h3>
+
+    <div class="wrapper">
+        <div class="first__number">
+            Перше число
+            <input type="number" value="" class="first__input">
+        </div>
+        <div class="second__number">
+            Друге число 
+            <input type="number" value="" class="second__input">
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn__sum">Додати</button>
+            <button type="submit" class="btn btn__sub">Відняти</button>
+            <button type="submit" class="btn btn__mult">Помножити</button>
+            <button type="submit" class="btn btn__div">Поділити</button>
+        </div>
+        <hr>
+        <div class="answer">
+            Результат
+            <input value="" class="result">
+        </div>
+        <div id="resText"></div>
+    </div>
+
+    <script>
+
+        // Знаходимо кнопки та результат
+        let sumButton = document.querySelector('.btn__sum')
+        let subtractButton = document.querySelector('.btn__sub')
+        let multiplyButton = document.querySelector('.btn__mult')
+        let divideButton = document.querySelector('.btn__div')
+        let resultInput = document.querySelector('.result')
+
+        // Додаємо обробник подій для кнопок
+        sumButton.addEventListener('click', function() {
+            let firstNum = parseFloat(document.querySelector('.first__input').value)
+            let secondNum = parseFloat(document.querySelector('.second__input').value)
+            let result = firstNum + secondNum
+            resultInput.value = result
+            document.getElementById('resText').innerText = `${firstNum} + ${secondNum} = ${result}`
+        })
+
+        subtractButton.addEventListener('click', function() {
+            let firstNum = parseFloat(document.querySelector('.first__input').value)
+            let secondNum = parseFloat(document.querySelector('.second__input').value)
+            let result = firstNum - secondNum
+            resultInput.value = result
+            document.getElementById('resText').innerText = `${firstNum} - ${secondNum} = ${result}`
+        })
+
+        multiplyButton.addEventListener('click', function() {
+            let firstNum = parseFloat(document.querySelector('.first__input').value)
+            let secondNum = parseFloat(document.querySelector('.second__input').value)
+            let result = firstNum * secondNum
+            resultInput.value = result
+            document.getElementById('resText').innerText = `${firstNum} * ${secondNum} = ${result}`
+        })
+
+        divideButton.addEventListener('click', function() {
+            let firstNum = parseFloat(document.querySelector('.first__input').value)
+            let secondNum = parseFloat(document.querySelector('.second__input').value)
+            let result = firstNum / secondNum
+            resultInput.value = result
+            document.getElementById('resText').innerText = `${firstNum} / ${secondNum} = ${result}`
+        })
+
+        // Змінюємо стилі елементів
+        let wrapperList = document.querySelectorAll('div')
+        for (const el of wrapperList) {
+            el.style.padding = '5px'
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-6</title>
+</head>
+<body>
+    <h3>Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди користувач вводить оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.</h3>
+
+    <div class="wrapper">
+        <div class="num">
+            Введіть кількість оцінок:
+            <input type="number" value="" class="num__input">
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn__table">get table</button>
+        </div>
+        <hr>
+        <div id="tableContainer"></div> <!-- Контейнер для таблиці -->
+        <div class="actions">
+            <button type="button" class="btn btn__average">get average</button>
+        </div>
+        <div id="resText"></div> <!-- Контейнер для результату -->
+    </div>
+
+    <script>
+        let tableButton = document.querySelector('.btn__table')
+        let averageButton = document.querySelector('.btn__average')
+        let tableContainer = document.getElementById('tableContainer')
+        let resText = document.getElementById('resText')
+
+        tableButton.addEventListener('click', function() {
+            let numInputs = parseInt(document.querySelector('.num__input').value)
+            let tableHTML = '<table><thead><tr><th>Введіть оцінки</th></tr></thead><tbody>'
+
+            for (let i = 0; i < numInputs; i++) {
+                tableHTML += `<tr><td><input type="number" class="score-input"></td></tr>`
+            }
+
+            tableHTML += '</tbody></table>'
+            tableContainer.innerHTML = tableHTML // Вставка таблиці в контейнер
+            averageButton.style.display = 'block' // Показати кнопку "get sum"
+            resText.innerHTML = ''
+        })
+
+        averageButton.addEventListener('click', function() {
+            let scoreInputs = document.querySelectorAll('.score-input')
+            let sum = 0
+            for (const input of scoreInputs) {
+                sum += parseInt(input.value) || 0
+            }
+            let average = sum / scoreInputs.length
+            resText.innerText = `Середнє бал: ${average.toFixed(1)}`
+        })
+
+        let wrapperList = document.querySelectorAll('.wrapper, .num, .actions')
+        for (const el of wrapperList) {
+            el.style.padding = '5px'
+            el.style.fontWeight = 900
+        }
+    </script>
+
+</body>
+</html>

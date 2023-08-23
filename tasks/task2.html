@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-2</title>
+</head>
+<body>
+    <h3>Зробити конвертер валют (курси валют – константи у скрипті).</h3>
+
+    <div class="wrapper">
+        <h4>1 EUR = 40 UAH / 1 USD = 37 UAH</h4>
+        <div class="grn">
+            Сума в UAH - 
+            <input type="number" value="" class="grn__input">
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn__convert">Конвертувати</button>
+        </div>
+        <hr>
+        <div class="convert">
+            Сума в EUR - 
+            <input value="" class="result__euro">
+        </div>
+        <div class="convert">
+            Сума в USD - 
+            <input value="" class="result__dollar">
+        </div>
+    </div>
+
+    <script>
+
+        //1. Вводимо даннi
+        const euro = 40
+        const dollar = 37
+
+        //2. Знаходимо кнопку та результат
+        let convertBtn = document.querySelector('.btn__convert')
+        let resultEuro = document.querySelector('.result__euro')
+        let resultDollar = document.querySelector('.result__dollar')
+        let grnInput = document.querySelector('.grn__input')
+
+        //3. Додаємо обробник подій
+        convertBtn.addEventListener('click', function() {
+            let grnNum = parseFloat(grnInput.value)
+            let euroResult = grnNum / euro
+            let dollarResult = grnNum / dollar
+            resultEuro.value = euroResult.toFixed(2)
+            resultDollar.value = dollarResult.toFixed(2)
+        })
+
+        // Змінюємо стилі елементів
+        let wrapperList = document.querySelectorAll('div')
+        for (const el of wrapperList) {
+            el.style.padding = '5px'
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-3</title>
+</head>
+<body>
+    <h3>Користувач задає рік народження. Визначити кількість років користувача.</h3>
+
+    <div class="wrapper">
+        <div class="years">
+            Рік народження - 
+            <input type="number" value="" class="year__input">
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn__convert">Скільки Вам років</button>
+        </div>
+        <hr>
+        <div id="resText"></div>
+    </div>
+
+    <script>
+
+        // Знаходимо кнопку та результат
+        const convertBtn = document.querySelector('.btn__convert')
+        const resultDiv = document.getElementById('resText')
+
+        // Додаємо обробник подій
+        convertBtn.addEventListener('click', function() {
+            const birthYearInput = document.querySelector('.year__input')
+            const birthYear = parseInt(birthYearInput.value)
+
+            // Отримуємо поточний рік
+            const currentYear = new Date().getFullYear()
+
+            // Визначаємо вік користувача
+            const userAge = currentYear - birthYear
+
+            // Виводимо результат
+            resultDiv.textContent = `Вам ${userAge}`
+        })
+
+        // Змінюємо стилі елементів
+        let wrapperList = document.querySelectorAll('div')
+        for (const el of wrapperList) {
+            el.style.padding = '5px'
+            el.style.fontWeight = 900
+        }
+
+    </script>
+</body>
+</html>

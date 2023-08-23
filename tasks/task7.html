@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-7</title>
+</head>
+<body>
+    <h3>Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х гідів(використати  - radio buttons). Ціни визначте самі. Підрахувати загальну вартість.</h3>
+
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Подорож вартість</title>
+</head>
+<body>
+    <h1>Калькулятор вартості подорожі.</h1>
+    <h4>Вартість транспорту - 100, 50, 200.</h4>
+    <h4>Вартість харчування - 20.</h4>
+    <h4>Вартість гідів - 50, 60, 70.</h4>
+
+    <form id="travelForm">
+        <h2>Етап 1</h2>
+        <label for="transport_0">Виберіть вид транспорту:</label>
+        <select id="transport_0" name="transport_0">
+            <option value="auto">Авто</option>
+            <option value="bus">Автобус</option>
+            <option value="plane">Літак</option>
+        </select><br>
+        
+        <label>Оберіть харчування:</label>
+        <input type="checkbox" name="meal_0" value="breakfast">Сніданок
+        <input type="checkbox" name="meal_0" value="lunch">Обід
+        <input type="checkbox" name="meal_0" value="dinner">Вечеря
+        <br>
+        
+        <label for="guide_0">Оберіть гіда:</label>
+        <input type="radio" name="guide_0" value="guide1" checked>Гід 1
+        <input type="radio" name="guide_0" value="guide2">Гід 2
+        <input type="radio" name="guide_0" value="guide3">Гід 3
+        <br><br>
+        
+        <h2>Етап 2</h2>
+        <label for="transport_1">Виберіть вид транспорту:</label>
+        <select id="transport_1" name="transport_1">
+            <option value="auto">Авто</option>
+            <option value="bus">Автобус</option>
+            <option value="plane">Літак</option>
+        </select><br>
+        
+        <label>Оберіть харчування:</label>
+        <input type="checkbox" name="meal_1" value="breakfast">Сніданок
+        <input type="checkbox" name="meal_1" value="lunch">Обід
+        <input type="checkbox" name="meal_1" value="dinner">Вечеря
+        <br>
+        
+        <label for="guide_1">Оберіть гіда:</label>
+        <input type="radio" name="guide_1" value="guide1" checked>Гід 1
+        <input type="radio" name="guide_1" value="guide2">Гід 2
+        <input type="radio" name="guide_1" value="guide3">Гід 3
+        <br><br>
+        
+        <h2>Етап 3</h2>
+        <label for="transport_2">Виберіть вид транспорту:</label>
+        <select id="transport_2" name="transport_2">
+            <option value="auto">Авто</option>
+            <option value="bus">Автобус</option>
+            <option value="plane">Літак</option>
+        </select><br>
+        
+        <label>Оберіть харчування:</label>
+        <input type="checkbox" name="meal_2" value="breakfast">Сніданок
+        <input type="checkbox" name="meal_2" value="lunch">Обід
+        <input type="checkbox" name="meal_2" value="dinner">Вечеря
+        <br>
+        
+        <label for="guide_2">Оберіть гіда:</label>
+        <input type="radio" name="guide_2" value="guide1" checked>Гід 1
+        <input type="radio" name="guide_2" value="guide2">Гід 2
+        <input type="radio" name="guide_2" value="guide3">Гід 3
+        <br><br>
+        
+        <br>
+        <button type="button" onclick="calculateTotal()">Розрахувати вартість</button>
+    </form>
+    
+    <h3>Загальна вартість подорожі: <span id="totalPrice">0</span> грн</h3>
+    <h3>Вартість транспорту: <span id="transportPrice">0</span> грн</h3>
+    <h3>Вартість гідів: <span id="guidePrice">0</span> грн</h3>
+    <h3>Вартість харчування: <span id="mealPrice">0</span> грн</h3>
+
+    <script>
+
+        function calculateTotal() {
+            const form = document.getElementById('travelForm')
+            const stages = form.getElementsByTagName('h2')
+
+            let totalPrice = 0
+            let totalTransportPrice = 0
+            let totalGuidePrice = 0
+            let totalMealPrice = 0
+
+            for (let i = 0; i < stages.length; i++) {
+                let transport = form.elements[`transport_${i}`].value
+                let meals = form.elements[`meal_${i}`]
+                let selectedMeal = Array.from(meals).filter(meal => meal.checked)
+                let guide = form.elements[`guide_${i}`].value
+
+                // Визначення цін для транспорту, харчування та гіда
+                let transportPrice = 0
+                if (transport === 'auto') {
+                    transportPrice = 100
+                } else if (transport === 'bus') {
+                    transportPrice = 50
+                } else if (transport === 'plane') {
+                    transportPrice = 200
+                }
+
+                let mealPrice = selectedMeal.length * 20
+
+                let guidePrice = 0
+                if (guide === 'guide1') {
+                    guidePrice = 50
+                } else if (guide === 'guide2') {
+                    guidePrice = 60
+                } else if (guide === 'guide3') {
+                    guidePrice = 70
+                }
+
+                totalTransportPrice += transportPrice
+                totalGuidePrice += guidePrice
+                totalMealPrice += mealPrice
+
+                totalPrice += transportPrice + mealPrice + guidePrice
+            }
+
+            let totalPriceElement = document.getElementById('totalPrice')
+            totalPriceElement.textContent = totalPrice
+
+            let transportPriceElement = document.getElementById('transportPrice')
+            transportPriceElement.textContent = totalTransportPrice
+
+            let guidePriceElement = document.getElementById('guidePrice')
+            guidePriceElement.textContent = totalGuidePrice
+
+            let mealPriceElement = document.getElementById('mealPrice')
+            mealPriceElement.textContent = totalMealPrice
+        }
+
+    </script>
+
+</body>
+</html>
+
+</body>
+</html>
+
+</body>
+</html>
